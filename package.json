@@ -4,7 +4,6 @@
   "author": "Thomas Honeyman",
   "license": "MIT",
   "scripts": {
-    "postinstall": "spago install",
     "clean": "rm -rf node_modules output .spago dist/*.js *.lock .cache",
     "build": "spago build",
     "test": "spago test",
