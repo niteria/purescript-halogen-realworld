@@ -212,7 +212,8 @@
         "flake-utils": "flake-utils",
         "mkSpagoDerivation": "mkSpagoDerivation",
         "nixpkgs": "nixpkgs_3",
-        "ps-overlay": "ps-overlay_2"
+        "ps-overlay": "ps-overlay_2",
+        "slimlock": "slimlock_3"
       }
     },
     "slimlock": {
@@ -250,6 +251,26 @@
         "owner": "thomashoneyman",
         "repo": "slimlock",
         "rev": "cf72723f59e2340d24881fd7bf61cb113b4c407c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thomashoneyman",
+        "repo": "slimlock",
+        "type": "github"
+      }
+    },
+    "slimlock_3": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1705950978,
+        "narHash": "sha256-N1/dGu/TaDeHy2emnb9gN2UJJnEuhZ4D3qUuWr2+534=",
+        "owner": "thomashoneyman",
+        "repo": "slimlock",
+        "rev": "4c8d8f5e471065778957a60ba96913fad8dc1e79",
         "type": "github"
       },
       "original": {
