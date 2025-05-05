@@ -33,21 +33,20 @@
             pkgs.spago-unstable
             pkgs.esbuild
             pkgs.purescript-language-server
+            pkgs.importNpmLock.hooks.linkNodeModulesHook
           ];
+          buildNodeModulesArgs = {
+            nodejs = pkgs.nodejs;
+            npmRoot = ./.;
+          };
           version = "0.1.0";
           buildPhase = ''
-            ln -s ${modules}/js/node_modules ./node_modules
             spago bundle
           '';
           installPhase = ''
             mkdir $out;
             cp ${./dist/index.html} $out/index.html;
             cp index.js $out/index.js;
-          '';
-          shellHook = ''
-            if [ ! -L "./node_modules" ]; then
-              ln -s "${modules}/js/node_modules" ./node_modules
-            fi
           '';
         };
       });
