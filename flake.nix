@@ -10,8 +10,16 @@
   };
 
   outputs =
-    { self, nixpkgs, flake-utils, mkSpagoDerivation, ps-overlay, slimlock }:
-    flake-utils.lib.eachDefaultSystem (system:
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      mkSpagoDerivation,
+      ps-overlay,
+      slimlock,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
@@ -23,7 +31,8 @@
         };
         src = ./.;
         modules = pkgs.slimlock.buildPackageLock { inherit src; };
-      in {
+      in
+      {
         packages.default = pkgs.mkSpagoDerivation {
           spagoYaml = ./spago.yaml;
           spagoLock = ./spago.lock;
@@ -42,7 +51,7 @@
           installPhase = ''
             mkdir $out;
             cp ${./dist/index.html} $out/index.html;
-            cp index.js $out/index.js;
+            cp index.js $out/index.js
           '';
           shellHook = ''
             if [ ! -L "./node_modules" ]; then
@@ -50,5 +59,11 @@
             fi
           '';
         };
-      });
+
+        packages.update-spago-lock = pkgs.writeShellScriptBin "update-spago-lock" ''
+          rm -f spago.lock
+          PATH="${pkgs.purs-unstable}/bin:$PATH" ${pkgs.spago-unstable}/bin/spago fetch
+        '';
+      }
+    );
 }
